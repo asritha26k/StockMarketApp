@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Portfolio Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header class="app-header">
+            <h1>Stock Portfolio Tracker</h1>
+            <div class="theme-switcher">
+                <span class="theme-label">Light</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="theme-label">Dark</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="card form-card">
+                <form id="stock-form">
+                    <h2>Add New Stock</h2>
+                    <div class="form-section">
+                        <h3>Purchase Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="stockName">Stock Name</label>
+                                <input type="text" id="stockName" required placeholder="e.g., Reliance Industries">
+                            </div>
+                            <div class="form-group">
+                                <label for="purchaseDate">Purchase Date</label>
+                                <input type="date" id="purchaseDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="totalShares">Total Shares</label>
+                                <input type="number" id="totalShares" min="0" step="any" required placeholder="e.g., 100">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="purchasePricePerShare">Purchase Price / Share (₹)</label>
+                                <input type="number" id="purchasePricePerShare" min="0" step="any" required placeholder="e.g., 1500">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Current Market Data</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="eps">EPS (Today)</label>
+                                <input type="number" id="eps" min="0" step="any" required placeholder="e.g., 85.50">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookValue">Book Value / Share</label>
+                                <input type="number" id="bookValue" min="0" step="any" required placeholder="e.g., 950.25">
+                            </div>
+                            <div class="form-group">
+                                <label for="dividend">Dividend / Share</label>
+                                <input type="number" id="dividend" min="0" step="any" required placeholder="e.g., 9.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="currentPrice">Current Price / Share</label>
+                                <input type="number" id="currentPrice" min="0" step="any" required placeholder="e.g., 2850.75">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Calculate</button>
+                        <button type="reset" id="reset-btn" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="right-column">
+                <div id="results-section" class="card results-card hidden">
+                    <h2>Performance Report for <span id="reportStockName"></span></h2>
+                    <div class="metrics-summary">
+                        <div class="metric-item">
+                            <h3>Total Return</h3>
+                            <p id="totalReturn"></p>
+                        </div>
+                        <div class="metric-item">
+                            <h3>ROI</h3>
+                            <p id="roi"></p>
+                        </div>
+                        <div class="metric-item">
+                            <h3>CAGR</h3>
+                            <p id="cagr"></p>
+                        </div>
+                    </div>
+                    <div class="detailed-metrics">
+                         <h3>Detailed Metrics</h3>
+                         <div class="details-grid">
+                            <div class="detail-item color-green"><span>Total Value Today</span><p id="totalValueToday"></p></div>
+                            <div class="detail-item color-blue"><span>Total Dividends</span><p id="totalDividends"></p></div>
+                            <div class="detail-item color-yellow"><span>Dividend Yield</span><p id="dividendYield"></p></div>
+                            <div class="detail-item color-purple"><span>Return on EPS</span><p id="returnOnEPS"></p></div>
+                            <div class="detail-item color-pink"><span>Total EPS</span><p id="totalEPS"></p></div>
+                            <div class="detail-item color-teal"><span>Total Book Value</span><p id="totalBookValue"></p></div>
+                        </div>
+                    </div>
+                    <button id="add-to-portfolio-btn" class="btn btn-success">Add to Portfolio</button>
+                </div>
+
+                <div id="portfolio-section" class="card portfolio-card">
+                    <div class="portfolio-header">
+                        <h2>My Portfolio</h2>
+                        <button id="download-csv-btn" class="btn btn-primary">Download as CSV</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="portfolio-table">
+                            <thead>
+                                <tr>
+                                    <th>Stock</th>
+                                    <th>Total Cost</th>
+                                    <th>Current Value</th>
+                                    <th>Total Return</th>
+                                    <th>ROI</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portfolio-body">
+                                </tbody>
+                        </table>
+                         <p id="portfolio-empty-msg" class="empty-message">Your portfolio is empty. Add a stock to get started.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
